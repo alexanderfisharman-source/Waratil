@@ -1,0 +1,38 @@
+[package]
+name = "tarteel"
+version = "0.1.0"
+edition = "2021"
+description = "A premium Ramadan 1447 Hijri and Quran App"
+
+[dependencies]
+# The UI Framework (Works on Android via NDK)
+eframe = { version = "0.24", default-features = false, features = ["glow", "accesskit", "default_fonts"] }
+
+# Data Handling for Quran.json
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Time & Date for Ramadan 2026
+chrono = { version = "0.4", features = ["serde"] }
+
+# Arabic Text Shaping (Crucial for a "Better than Quran.com" look)
+# This prevents letters from appearing disconnected or backwards
+arabic_reshaper = "0.4"
+unicode-bidi = "0.3"
+
+[build-dependencies]
+# Needed if you plan to bundle assets into the binary
+# (Optional, but good for keeping the APK self-contained)
+
+[package.metadata.android]
+# This section tells the APK builder how to identify your app on the phone
+package = "com.yourname.tarteel"
+label = "Tarteel"
+icon = "assets/icon.png"
+assets = "assets"
+# Ensure the app stays in Portrait mode like a real Quran app
+orientation = "portrait"
+
+[[bin]]
+name = "tarteel"
+path = "src/main.rs"
